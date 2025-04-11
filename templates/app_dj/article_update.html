@@ -1,0 +1,12 @@
+{% extends "app_dj/base.html" %} {% block content %}
+<h1>Edit Article</h1>
+<p>{{article.word_count}} word{{ article.word_count | pluralize }}.</p>
+<p>Last edited on {{ articles.created_at | date:"jS F Y" }}</p>
+<!-- {{ articles.content | safe }} -->
+<form method="POST">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Save</button>
+</form>
+<a href="{% url 'home' %}">Back to list</a>
+<a href="{% url 'delete_article' article.id %}">Delete article</a>
+{% endblock content %}
