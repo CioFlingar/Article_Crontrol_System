@@ -6,7 +6,21 @@
     <title>Django ProJect</title>
   </head>
   <body>
-    <header>This is a test header</header>
+    <nav>
+      <ul>
+        <li><a href="{% url 'home' %}">Articles</a></li>
+        <li>
+          {% if user.is_authenticated %}
+          <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Log out</button>
+          </form>
+          {% else %}
+          <a href="{% url 'login' %}">login</a>
+          {% endif %}
+        </li>
+      </ul>
+    </nav>
     {% block content %} {% endblock content %}
     <footer>This is a test footer.</footer>
   </body>
