@@ -129,6 +129,13 @@ AUTH_PASSWORD_VALIDATORS = [
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "account_login"
 
+
+# Allauth settings
+ACCOUNT_LOGIN_METHODS = {"email"}
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_SIGNUP_FIELDS = ["email*", "username", "password1*", "password2*"]
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
