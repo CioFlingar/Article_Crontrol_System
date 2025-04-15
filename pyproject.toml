@@ -9,7 +9,8 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "django (>=5.1.7,<6.0.0)",
-    "python-dotenv (>=1.1.0,<2.0.0)"
+    "python-dotenv (>=1.1.0,<2.0.0)",
+    "django-allauth[socialaccount] (>=65.7.0,<66.0.0)"
 ]
 
 [tool.poetry]
