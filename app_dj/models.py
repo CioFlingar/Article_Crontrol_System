@@ -3,6 +3,7 @@ import re
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from .managers import UserProfileManager
 
 ARTICLE_STATUS = (
     ("draft", "draft"),
@@ -13,7 +14,12 @@ ARTICLE_STATUS = (
 
 # Create your models here.
 class UserProfile(AbstractUser):
-    pass
+    email = models.EmailField("email address", max_length=255, unique=True)
+
+    objects = UserProfileManager()
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
 
 
 class Articles(models.Model):
