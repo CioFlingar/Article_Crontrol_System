@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Django ProJect</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
   </head>
   <body>
     <nav>
@@ -23,5 +28,6 @@
     </nav>
     {% block content %} {% endblock content %}
     <footer>This is a test footer.</footer>
+    {% block page_js %} {% endblock page_js %}
   </body>
 </html>

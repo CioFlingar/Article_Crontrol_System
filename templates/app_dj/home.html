@@ -1,5 +1,12 @@
-{% extends "app_dj/base.html" %} {% block content %}
+{% extends "app_dj/base.html" %} {% block content %} {% load humanize %}
 <h1>Articles</h1>
+
+<p>
+  You have created {{ user.article_count | intcomma }}
+  article{{user.article_count|pluralize}} and written {{ user.written_words | intcomma }} 
+  word{{ user.written_words|pluralize }}.
+</p>
+
 <a href="{% url 'create_article' %}">Create article</a>
 {% if articles %}
 <ul>

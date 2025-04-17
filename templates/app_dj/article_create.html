@@ -1,8 +1,11 @@
-{% extends "app_dj/base.html" %} {% block content %}
+{% extends "app_dj/layouts/base_form.html" %}
+{% block content %}
 <h1>Create Article</h1>
 <form method="POST">
-  {% csrf_token %} {{ form.as_p }}
+  {% csrf_token %}
+  {{ form.as_p }}
   <button type="submit">Save</button>
 </form>
 <a href="{% url 'home'  %}">Back to list</a>
 {% endblock content %}
+
