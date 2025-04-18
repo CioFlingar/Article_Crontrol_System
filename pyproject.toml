@@ -10,7 +10,9 @@ requires-python = ">=3.13"
 dependencies = [
     "django (>=5.1.7,<6.0.0)",
     "python-dotenv (>=1.1.0,<2.0.0)",
-    "django-allauth[socialaccount] (>=65.7.0,<66.0.0)"
+    "django-allauth[socialaccount] (>=65.7.0,<66.0.0)",
+    "psycopg (>=3.2.6,<4.0.0)",
+    "dj-database-url (>=2.3.0,<3.0.0)"
 ]
 
 [tool.poetry]
