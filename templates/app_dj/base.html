@@ -1,33 +1,38 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Django ProJect</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css"
-    />
+    <link rel="stylesheet" href="{% static 'output.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <nav>
-      <ul>
-        <li><a href="{% url 'home' %}">Articles</a></li>
-        <li>
-          {% if user.is_authenticated %}
-          <form method="POST" action="{% url 'account_logout' %}">
-            {% csrf_token %}
-            <button type="submit">Log out</button>
-          </form>
-          {% else %}
-          <a href="{% url 'account_login' %}">login</a>
-          {% endif %}
-        </li>
-      </ul>
+        <ul>
+            <li><a href="{% url 'home' %}">Articles</a></li>
+            <li>
+                {% if user.is_authenticated %}
+                <form method="POST" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Log out</button>
+                </form>
+                {% else %}
+                <a href="{% url 'account_login' %}">login</a>
+                {% endif %}
+            </li>
+        </ul>
     </nav>
+    <h1 class="text-4xl text-red-600 font-bold">Hello Tailwind!</h1>
+
     {% block content %} {% endblock content %}
     <footer>This is a test footer.</footer>
     {% block page_js %} {% endblock page_js %}
-  </body>
+</body>
+
 </html>
