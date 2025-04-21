@@ -1,7 +1,6 @@
 {
   "name": "django_pj",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -16,17 +15,17 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/CioFlingar/articles_management_app/issues"
   },
   "homepage": "https://github.com/CioFlingar/articles_management_app#readme",
-  "dependencies": {
-    "@tailwindcss/cli": "^4.1.4"
-  },
+  "description": "",
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.4"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.4"
   }
 }

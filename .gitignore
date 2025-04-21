@@ -173,7 +173,7 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-test.py
+menu.py
 test1.py
 
 
