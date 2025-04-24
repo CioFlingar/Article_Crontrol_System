@@ -1,10 +1,12 @@
 {% extends "base.html" %}
-
 {% load widget_tweaks %}
 {% load allauth socialaccount account %}
 
-{% block base_content %}
+{% block head_title %}
+- Sign In
+{% endblock head_title %}
 
+{% block base_content %}
 <main class="max-w-lg mx-auto mt-10">
     <div class="flex flex-col bg-gray-800 text-white p-6 lg:p-16 rounded-md">
         <div class="flex flex-col text-center">
