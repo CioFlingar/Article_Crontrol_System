@@ -4,15 +4,17 @@
 
 {% block base_content %}
 <main class="max-w-7xl mx-auto mt-10">
-    <form method="POST">
+    <form method="POST" x-data="{
+        articleStatus:''
+    }">
         {% csrf_token %}
         <!-- prettier-ignore -->
         <div class="mb-4">
         {% render_field form.title class="text-4xl w-full rounded-md border-2 border-gray-200 focus:ring-1 focus:ring-amber-500 focus:border-amber-500" placeholder="Write a title for your article" %}
         </div>
 
-        <div class="flex gap-10 mb-10 items-center">
-        {% render_field form.status class="text-sm border-none rounded-sm uppercase"%}
+        <div class="flex gap-10 mb-10 items-center" >
+        {% render_field form.status class="text-xs border-none rounded-sm uppercase" x-bind::class="`article-status-${articleStatus}`" x-model.fill="articleStatus" %}
 
         {% block article_stats %}
         {% endblock article_stats %}
