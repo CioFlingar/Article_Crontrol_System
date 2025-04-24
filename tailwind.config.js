@@ -6,7 +6,11 @@ module.exports = {
         './static/**/*.js'
     ],
     theme: {
-        extend: {},
+        extend: {
+            boxShadow: {
+                underline: "inset 0 -2px 0 0"
+            }
+        },
     },
     plugins: [
         require("@tailwindcss/forms"),

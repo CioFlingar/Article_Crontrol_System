@@ -1,11 +1,11 @@
 {% extends "app_dj/layouts/base_form.html" %}
-{% block content %}
-<h1>Create Article</h1>
-<form method="POST">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Save</button>
-</form>
-<a href="{% url 'home'  %}">Back to list</a>
-{% endblock content %}
 
+{% block head_title %}
+- Create article
+{% endblock head_title %}
+
+{% block buttons %}
+<div class="flex justify-end">
+<button type="submit" class="button primary">Save</button>
+</div>
+{% endblock buttons %}

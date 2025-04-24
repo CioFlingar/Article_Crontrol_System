@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Django ProJect {% block head_title %}{% endblock head_title %} </title>
+    <link rel="stylesheet" href="{% static 'output.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+
+    {% block extra_head %}
+    {% endblock extra_head %}
+</head>
+
+{% url 'create_article' as create_new_url %}
+{% url 'home' as your_articles_url%}
+{% url 'account_email' as change_email_url %}
+
+<body>
+    <nav class="px-10 py-4 border-b border-gray-300 shadow-md">
+        <div class="flex justify-end items-center gap-6 max-w-7xl mx-auto">
+            {% if user.is_authenticated %}
+            <a class="button primary"
+                href="{% if request.path != create_new_url %} {{ create_new_url }} {% else %} # {% endif %}">Create
+                new</a>
+            <a class="hover:shadow-underline hover:shadow-gray-300 {% if request.path == your_articles_url %} font-semibold {% endif %}"
+                href="{{ your_articles_url }}">Articles</a>
+            <a class="hover:shadow-underline hover:shadow-gray-300 {% if request.path == change_email_url %} font-semibold {% endif %}"
+                href="{{ change_email_url }}">Change email</a>
+            <form method="POST" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                <button class="hover:shadow-underline hover:shadow-gray-300" type="submit">Log out</button>
+            </form>
+            {% else %}
+            <a class="button secondary text-sm" href="{% url 'account_login' %}">login</a>
+            <a class="button primary text-sm" href="{% url 'account_signup' %}">Sign up</a>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="p-2 md:p-4 lg:p-6">
+        {% block base_content %}
+        {% endblock base_content %}
+    </div>
+
+    {% block extra_body %}
+    {% endblock extra_body %}
+
+    {% block page_js %}
+    {% endblock page_js %}
+</body>
+
+</html>

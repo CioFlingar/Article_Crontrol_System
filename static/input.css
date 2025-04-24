@@ -1,2 +1,68 @@
 @import "tailwindcss";
-@tailwind utilities;
+@config "../tailwind.config.js";
+
+
+.title{
+    @apply text-6xl font-semibold tracking-tight;
+}
+
+.subtitle{
+    @apply text-4xl font-semibold tracking-tight;
+}
+
+.button{
+    @apply font-medium px-4 py-2 rounded-md;
+}
+
+.primary{
+    @apply rounded-md border border-amber-700 bg-amber-400 px-4 py-2 font-medium text-white shadow-sm hover:bg-amber-500 focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:outline-none;
+}
+
+.secondary{
+    @apply rounded-md border border-gray-700 bg-gray-100 px-4 py-2 font-medium text-gray-700 shadow-sm hover:bg-gray-200 focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:outline-none;
+}
+
+.danger{
+    @apply rounded-md border border-red-400 bg-red-200 px-4 py-2 font-medium text-red-800 shadow-sm hover:bg-red-300 focus:ring-2 focus:ring-red-200 focus:ring-offset-2 focus:outline-none;
+}
+
+.EasyMDEContainer, textarea{
+    @apply rounded-md border-gray-200 border-2 text-base leading-6;
+}
+
+.EasyMDEContainer .CodeMirror{
+    @apply !border-none !bg-inherit;
+}
+
+.EasyMDEContainer:has(textarea:focus), textarea:focus{
+    @apply ring-1 ring-amber-500 border-amber-500;
+}
+
+.form-field input{
+    @apply w-full p-2 rounded-md;
+
+}
+
+.error{
+    @apply p-2 my-2 text-sm text-red-700 bg-red-50 rounded-md border-red-300;
+}
+
+details > summary::-webkit-details-maker{
+    display: none;
+}
+
+input[type="radio"]{
+ @apply text-amber-500 ml-1 h-4 w-4 focus:ring-amber-500;
+}
+
+.allauth-form input[type="email"]{
+    @apply w-full rounded-md text-black;
+}
+
+.allauth-form p:has(input[type="email"]){
+    @apply text-left mt-10;
+}
+
+.allauth-form p:has(input[type="email"]) label{
+    @apply font-bold
+}
