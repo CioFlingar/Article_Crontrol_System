@@ -1,5 +1,7 @@
 from typing import Any
 
+
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import QuerySet
 from django.urls import reverse_lazy
@@ -39,11 +41,11 @@ class ArticleListView(LoginRequiredMixin, ListView):
     template_name = "app_dj/home.html"
     model = Articles
     context_object_name = "articles"
+    paginate_by = 4
 
     def get_queryset(self) -> QuerySet[Any]:
-        return Articles.objects.filter(creator=self.request.user).order_by(
-            "-created_at"
-        )
+        queryset = super().get_queryset().filter(creator=self.request.user)
+        return queryset.order_by("-created_at")
 
 
 class ArticleCreateView(LoginRequiredMixin, CreateView):
@@ -77,3 +79,7 @@ class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self) -> bool | None:
         return self.request.user == self.get_object().creator
+
+    def post(self, request, *args, **kwargs):
+        messages.success(request, "Article deleted successfully.", extra_tags="destructive")
+        return super().post(request, *args, **kwargs)

@@ -27,6 +27,22 @@
         </li>
         {%endfor%}
     </ul>
+    {% if is_paginated %}
+        <div class="flex flex-row items justify-center center text-xl mt-6">
+            {% if page_obj.has_previous %}
+                <a class="mx-2" href="?page={{ page_obj.previous_page_number }}">
+                    {% include "svgs/chevron.svg" with class="h-6 w-7 mt-1 rotate-180 border border-black rounded-md p-1" %}
+                </a>
+            {% endif %}
+            <span>Page {{ page_obj.number }} of {{ paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+                <a class="mx-2" href="?page={{ page_obj.next_page_number }}">
+                    {% include "svgs/chevron.svg" with class="h-6 w-7 mt-1 border border-black rounded-md p-1" %}
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
+
     {% else %}
     <p>There is no article to show!</p>
     {% endif %}
