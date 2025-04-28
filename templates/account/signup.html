@@ -50,12 +50,6 @@
                                 </details>
                             </div>
                             <div>
-                                <label class="sr-only" for="{{ form.password2.id_for_label }}">Password confirmation</label>
-                                <div class="form-field">
-                                    {% render_field form.password2 class="block text-black shadow-sm focus:ring-amber-500 focus:border-amber-500 border-gray-300 text-sm" %}
-                                </div>
-                            </div>
-                            <div>
                                 <p class="text-sm text-center">Already have an account? <a href="{% url 'account_login' %}" class="font-bold hover:underline">Sign in instead</a></p>
                                 <button type="submit" class="button primary w-full mt-2 text-sm">Create your account</button>
                             </div>
