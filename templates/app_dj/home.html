@@ -17,43 +17,55 @@
     <h2 class="subtitle mb-6">Your latest articles</h2>
 
     <form method="GET" class="flex flex-col sm:flex-row gap-3 form-field">
-        <input class="text-black shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-gray-300 rounded-md" type="search" name="search" placeholder="Search aritcles" value="{{ request.GET.search }}">
-        <button class="flex gap-1 button secondary items-center justify-center" type="submit">
-            {% include "svgs/magnifier.svg" with class="w-6 h-6 mr-2" %}
+        <input class="text-black shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm border-gray-300 rounded-md"
+         type="search" name="search" placeholder="Search aritcles" value="{{ request.GET.search }}"
+         hx-get="{{ request.path }}"
+         hx-trigger="input changed delay:500ms, search"
+         hx-target="#articles_results"
+         hx-select="#articles_results"
+         hx-indicator="svg.loading"
+         hx-disabled-elt="next button"
+         hx-push-url="true">
+
+        <button class="flex gap-1 button secondary items-center justify-center [&>.loading.htmx-request.hidden]:!inline-block [&>.loading.htmx-request]:hidden disabled:cursor-not-allowed disabled:opacity-50" type="submit">
+            {% include "svgs/magnifier.svg" with class="loading w-6 h-6 mr-2" %}
+            {% include "svgs/loading.svg" with class="loading w-6 h-6 mr-2 hidden motion-safe:animate-spin" %}
             Search
         </button>
-        <a href="{% url 'home' %}" class="button secondary text-center">Clear search</a>
+        <a href="{{ request.path }}" class="button secondary text-center">Clear search</a>
     </form>
 
-    {% if articles %}
-    <ul>
-        {% for article in articles %}
-        <li>
-            <a class="text-2xl flex items-center" href="{% url 'update_article' article.id %}">{{ article.title }} <span
-                    class="ml-2 mt-1.5 px-4 py-0.5 text-xs rounded-sm uppercase article-status-{{ article.status }}">{{ article.status }}</span></a>
+    <div id="articles_results" class="">
+        {% if articles %}
+            <ul>
+                {% for article in articles %}
+                <li>
+                    <a class="text-2xl flex items-center" href="{% url 'update_article' article.id %}">{{ article.title }} <span
+                            class="ml-2 mt-1.5 px-4 py-0.5 text-xs rounded-sm uppercase article-status-{{ article.status }}">{{ article.status }}</span></a>
 
-            <p class="text-sm">{{ article.word_count }} word{{article.wordcount | pluralize}}</p>
-        </li>
-        {%endfor%}
-    </ul>
-    {% if is_paginated %}
-        <div class="flex flex-row items justify-center center text-xl mt-6">
-            {% if page_obj.has_previous %}
-                <a class="mx-2" href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
-                    {% include "svgs/chevron.svg" with class="h-6 w-7 mt-1 rotate-180 border border-black rounded-md p-1" %}
-                </a>
+                    <p class="text-sm">{{ article.word_count }} word{{article.wordcount | pluralize}}</p>
+                </li>
+                {%endfor%}
+            </ul>
+            {% if is_paginated %}
+                <div class="flex flex-row items justify-center center text-xl mt-6">
+                    {% if page_obj.has_previous %}
+                        <a class="mx-2" href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                            {% include "svgs/chevron.svg" with class="h-6 w-7 mt-1 rotate-180 border border-black rounded-md p-1" %}
+                        </a>
+                    {% endif %}
+                    <span>Page {{ page_obj.number }} of {{ paginator.num_pages }}</span>
+                    {% if page_obj.has_next %}
+                        <a class="mx-2" href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                            {% include "svgs/chevron.svg" with class="h-6 w-7 mt-1 border border-black rounded-md p-1" %}
+                        </a>
+                    {% endif %}
+                </div>
             {% endif %}
-            <span>Page {{ page_obj.number }} of {{ paginator.num_pages }}</span>
-            {% if page_obj.has_next %}
-                <a class="mx-2" href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
-                    {% include "svgs/chevron.svg" with class="h-6 w-7 mt-1 border border-black rounded-md p-1" %}
-                </a>
-            {% endif %}
-        </div>
-    {% endif %}
 
-    {% else %}
-    <p>There is no article to show!</p>
-    {% endif %}
+        {% else %}
+        <p>There is no article to show!</p>
+        {% endif %}
+    </div>
 </main>
 {% endblock base_content %}
