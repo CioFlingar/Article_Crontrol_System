@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 import dj_database_url
@@ -47,6 +47,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     "allauth",
+    "anymail",
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.github",
@@ -128,6 +129,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+DEFAULT_FROM_EMAIL = os.getenv("RESEND_EMAIL", "None")
+
+ANYMAIL = {
+    "RESEND_API_KEY": os.getenv("RESEND_API_KEY", "None"),
+    "SEND_DEFAULTS": {"tags": ["Django_pj"]}
+}
+
+EMAIL_BACKEND = 'anymail.backends.resend.EmailBackend'
+
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "account_login"
 
@@ -135,8 +145,10 @@ LOGOUT_REDIRECT_URL = "account_login"
 # Allauth settings
 ACCOUNT_LOGIN_METHODS = {"email"}
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_SIGNUP_FIELDS = ["email*", "username", "password1*", "password2*"]
-ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_SIGNUP_FIELDS = ["email*", "username", "password1*"]
+ACCOUNT_EMAIL_VERIFICATION = True
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE=False
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
