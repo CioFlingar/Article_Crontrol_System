@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
+from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic.base import RedirectView
@@ -24,6 +24,10 @@ urlpatterns = [
     path("article/", include("app_dj.urls")),
     path("accounts/", include("allauth.urls")),
     path("", RedirectView.as_view(pattern_name="home")),
-    path("__debug__/", include("debug_toolbar.urls")),
-    path("__reload__/", include("django_browser_reload.urls")),
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        path("__debug__/", include("debug_toolbar.urls")),
+        path("__reload__/", include("django_browser_reload.urls")),
+    ]
