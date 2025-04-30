@@ -48,6 +48,7 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.github",
     "widget_tweaks",
+    "whitenoise.runserver_nostatic",
 ]
 
 PROJECT_APPS = [
@@ -58,6 +59,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -107,7 +109,11 @@ WSGI_APPLICATION = "django_pj.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {"default": dj_database_url.config(conn_max_age=600)}
+DATABASES = {
+    "default": dj_database_url.config(
+        conn_max_age=600,
+    )
+}
 # Customize user model
 AUTH_USER_MODEL = "app_dj.UserProfile"
 
@@ -147,7 +153,6 @@ ACCOUNT_LOGIN_METHODS = {"email"}
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_SIGNUP_FIELDS = ["email*", "username", "password1*"]
 ACCOUNT_EMAIL_VERIFICATION = True
-ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE=False
 
 
 # Internationalization
@@ -168,6 +173,17 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = [BASE_DIR / "static"]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage"
+    },
+    "staticfiles":{
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    }
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
