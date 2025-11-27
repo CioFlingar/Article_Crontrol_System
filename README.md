@@ -219,7 +219,7 @@ This project is licensed under Me(😉).
 **Walid Hasan**  
 📩 Email: [eng.walidhasan@gmail.com](mailto:eng.walidhasan@gmail.com)  
 🌐 GitHub: CioFlinGar  
-🔗 LinkedIn: linkedin.com/in/walid-hasan-
+🔗 LinkedIn: [walid-hasan-](linkedin.com/in/walid-hasan-)
 
 ----------
 
@@ -237,3 +237,4 @@ If you find this project helpful, please give it a ⭐ on GitHub! Your support m
 -   🔗 REST API for third-party integrations.
 
 Star the repo and stay tuned for updates! 🚀
+
